@@ -1,5 +1,7 @@
 package edu.sgu.delicatessen.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 import javax.persistence.Column;
@@ -19,6 +21,7 @@ public class Category {
     private int categoryId;
     private String categoryName;
     @OneToMany(mappedBy = "category")
+    @JsonIgnore
     private List<Post> posts;
     public int getCategoryId() {
         return this.categoryId;

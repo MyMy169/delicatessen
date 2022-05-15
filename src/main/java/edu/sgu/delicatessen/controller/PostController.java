@@ -4,8 +4,13 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import edu.sgu.delicatessen.entity.Role;
+import edu.sgu.delicatessen.entity.User;
+import edu.sgu.delicatessen.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +28,12 @@ import edu.sgu.delicatessen.service.PostService;
 @RestController
 @RequestMapping("/posts")
 public class PostController {
+    @Autowired
     private PostService postService;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @GetMapping
     public ResponseEntity<BaseResponse<List<PostResponse>>> getAll(){
         return ResponseEntity.ok(new BaseResponse<List<PostResponse>>(postService.findAll()));
